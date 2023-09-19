@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -24,13 +24,19 @@
                                 alt="" height="100%"
                                 src="assets/img/Stars_in_the_Universe_4K_Relaxing_Screensaver.gif"
                                 style="position: absolute;top: 0;width: 100%;height: 100%;left: 0;object-fit: cover;"
-                                th:src="@{${pizza.image}}"/>
+                                th:src="@{${pizza.image}}"
+                        />
                     </div>
                     <h4 class="card-title" th:text="${pizza.name}">Diavola</h4>
                     <h6 class="text-muted card-subtitle mb-2" th:text="${pizza.description}">Pomodori, mozzarella</h6>
                     <p class="lead fw-bolder card-text" th:text="|${pizza.price}€|">8.99€</p>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 mx-auto">
+            <a class="btn btn-danger" th:href="@{/}">Indietro</a>
         </div>
     </div>
 </div>
