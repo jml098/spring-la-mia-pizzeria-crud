@@ -31,8 +31,8 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/{pizzaId}")
-    public String pizza(@PathVariable("pizzaId") Long id, Model model) {
+    @GetMapping("/{id}")
+    public String pizza(@PathVariable Long id, Model model) {
 
         Optional<Pizza> pizzaOptional = pizzaRepository.findById(id);
         if (pizzaOptional.isPresent()) {
@@ -52,7 +52,6 @@ public class IndexController {
         return "pizza/form";
     }
 
-
     @PostMapping("/create")
     public String createPizza(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult) {
 
@@ -60,6 +59,35 @@ public class IndexController {
 
         pizzaRepository.save(pizza);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable Long id) {
+
+        Optional<Pizza> pizzaOptional = pizzaRepository.findById(id);
+        if (pizzaOptional.isPresent()) {
+            model.addAttribute("pizza", pizzaOptional.get());
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return "pizza/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editPizza(@PathVariable Long id, @Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) return "pizza/edit";
+
+        pizzaRepository.save(pizza);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePizza(@PathVariable Long id) {
+        pizzaRepository.deleteById(id);
         return "redirect:/";
     }
 }

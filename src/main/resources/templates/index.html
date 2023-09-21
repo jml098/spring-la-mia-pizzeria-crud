@@ -31,6 +31,12 @@
                     </a>
                     <h6 class="text-muted card-subtitle mb-2" th:text="${pizza.description}">Pomodori, mozzarella</h6>
                     <p class="lead fw-bolder card-text" th:text="|${pizza.price}€|">8.99€</p>
+                    <a class="btn btn-primary" th:href="@{/edit/{id}(id=${pizza.id})}">
+                        Modifica
+                    </a>
+                    <form method="post" th:action="@{/delete/{id}(id=${pizza.id})}">
+                        <input class="btn btn-danger" type="submit" value="Elimina">
+                    </form>
                 </div>
             </div>
         </div>

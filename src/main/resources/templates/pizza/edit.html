@@ -21,7 +21,7 @@
             <form
                     id="pizza-form"
                     method="POST"
-                    th:action="@{/create}"
+                    th:action="@{/edit/{id}(id=${pizza.id})}"
                     th:object="${pizza}"
             >
 
@@ -79,7 +79,7 @@
                 </div>
 
 
-                <button class="btn btn-primary" type="submit">Aggiungi</button>
+                <button class="btn btn-primary" type="submit">Modifica</button>
                 <a class="btn btn-danger" th:href="@{/}">Indietro</a>
 
             </form>
